@@ -29,6 +29,7 @@ export default function CustomButton2({
 const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: 'bold',
+    marginHorizontal: 40,
   },
   buttonStyle: {
     backgroundColor: globalStyles.mainColor,
