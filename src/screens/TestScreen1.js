@@ -15,6 +15,7 @@ import { useForm, Controller } from 'react-hook-form';
 import CustomInput from '../components/commons/input/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../components/commons/input/validation';
+import CalendarComponent from '../components/units/Calendar';
 
 export default function TestScreen1Page() {
   const navigation = useNavigation();
@@ -128,6 +129,7 @@ export default function TestScreen1Page() {
         />
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
+      <CalendarComponent />
     </MainWrapper>
   );
 }
