@@ -4,4 +4,6 @@ export const globalStyles = {
   mainColor: '#18C07A',
   mainBackgroundColor: '#EDEDED',
   gray: '#D9D9D9',
+  subLoginTextColor: '#AFAFAF',
+  loginTextColor: '#878787',
 };

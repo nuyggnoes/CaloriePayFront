@@ -21,6 +21,6 @@ export default function Title() {
 const styles = StyleSheet.create({
   title: {
     fontFamily: 'Kanit-Bold',
-    fontSize: 24,
+    fontSize: 25,
   },
 });
