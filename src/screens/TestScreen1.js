@@ -16,6 +16,7 @@ import CustomInput from '../components/commons/input/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../components/commons/input/validation';
 import CalendarComponent from '../components/units/Calendar';
+import MainContainer from '../components/commons/layout/container/MainContainer';
 
 export default function TestScreen1Page() {
   const navigation = useNavigation();
@@ -37,7 +38,9 @@ export default function TestScreen1Page() {
 
   return (
     <MainWrapper>
-      <Text>TestScreen1</Text>
+      <MainContainer>
+        <Text>hi</Text>
+      </MainContainer>
       <TouchableOpacity onPress={onPressMove}>
         <Text>test3</Text>
       </TouchableOpacity>

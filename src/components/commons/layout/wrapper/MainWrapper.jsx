@@ -8,13 +8,12 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { globalStyles } from '../../../../styles/globalStyles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Header from '../header/Header';
 
 export default function MainWrapper(props) {
   return (
     <GestureHandlerRootView>
-      <SafeAreaView
-        style={{ backgroundColor: globalStyles.mainBackgroundColor }}
-      >
+      <SafeAreaView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAwareScrollView
             contentContainerStyle={{

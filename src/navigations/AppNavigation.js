@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen name="test1" component={TestScreen1Page} />
       <Stack.Screen name="test2" component={TestScreen2Page} />
       <Stack.Screen name="test3" component={TestScreen3Page} />

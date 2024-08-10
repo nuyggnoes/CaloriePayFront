@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
+import MainWrapper from '../components/commons/layout/wrapper/MainWrapper';
 export default function TestScreen3Page() {
   return (
-    <View style={styles.container}>
+    <MainWrapper>
       <Text>TestScreen3</Text>
-    </View>
+    </MainWrapper>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
