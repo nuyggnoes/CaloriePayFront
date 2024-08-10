@@ -12,16 +12,19 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 export default function MainWrapper(props) {
   return (
     <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={{ backgroundColor: globalStyles.mainBackgroundColor }}
+      >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAwareScrollView
             contentContainerStyle={{
               flexGrow: 1,
             }}
             enableAutomaticScroll={true}
+            showsVerticalScrollIndicator={false}
             extraHeight={100}
           >
-            <View>{props.children}</View>
+            <View style={styles.container}>{props.children}</View>
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -31,7 +34,8 @@ export default function MainWrapper(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: globalStyles.mainBackgroundColor,
     flex: 1,
+    alignItems: 'center',
+    marginBottom: 80,
   },
 });

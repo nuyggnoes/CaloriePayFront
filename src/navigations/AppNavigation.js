@@ -99,7 +99,7 @@ const AuthStackNavigator = () => {
 };
 
 export default function AppContainer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <NavigationContainer>
       {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
