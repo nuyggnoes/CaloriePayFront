@@ -7,8 +7,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { useNavigation } from '@react-navigation/native';
 
 export default function InitialScreen() {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -36,6 +38,7 @@ export default function InitialScreen() {
           onPress={() => {
             //   Alert.alert('CUSTOM_BUTTON');
             console.log('register');
+            navigation.navigate('signUpPersonInfo');
           }}
         />
         <Text style={styles.subLoginText}>이미 회원이신가요?</Text>

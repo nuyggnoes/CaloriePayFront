@@ -17,6 +17,7 @@ import DetailPage from '../screens/Detail';
 import { useState } from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
+import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -94,12 +95,16 @@ const AuthStackNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="initial" component={InitialScreen} />
       <Stack.Screen name="login" component={LoginScreen} />
+      <Stack.Screen
+        name="signUpPersonInfo"
+        component={SignUpPersonInfoScreen}
+      />
     </Stack.Navigator>
   );
 };
 
 export default function AppContainer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <NavigationContainer>
       {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
