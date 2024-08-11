@@ -1,4 +1,4 @@
-import CustomButton2 from '../../components/commons/buttons/CustomButton';
+import CustomButton from '../../components/commons/buttons/CustomButton';
 import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Title from '../../components/commons/text/Title';
@@ -24,7 +24,7 @@ export default function InitialScreen() {
         <Title />
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton2
+        <CustomButton
           title="이메일로 회원가입"
           icon={{
             name: 'envelope',

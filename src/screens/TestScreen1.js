@@ -3,8 +3,7 @@ import {
   GestureHandlerRootView,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
-import CustomButton2 from '../components/commons/buttons/CustomButton';
-import CustomButton1 from '../components/commons/buttons/Button';
+import CustomButton from '../components/commons/buttons/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import MainWrapper from '../components/commons/layout/wrapper/MainWrapper';
 
@@ -44,7 +43,7 @@ export default function TestScreen1Page() {
       <TouchableOpacity onPress={onPressMove}>
         <Text>test3</Text>
       </TouchableOpacity>
-      <CustomButton1
+      <CustomButton
         title="Small Button"
         onPress={() => {
           alert('Small Button Pressed');
@@ -81,7 +80,7 @@ export default function TestScreen1Page() {
           Alert.alert('hi');
         }}
       />
-      <CustomButton2
+      <CustomButton
         title="이메일로 회원가입"
         icon={{
           name: 'envelope',

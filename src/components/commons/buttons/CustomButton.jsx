@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { globalStyles } from '../../../styles/globalStyles';
 import { Button } from '@rneui/base';
 
-export default function CustomButton2({
+export default function CustomButton({
   title,
   icon,
   iconContainerStyle,
@@ -11,6 +11,7 @@ export default function CustomButton2({
   buttonStyle,
   containerStyle,
   onPress,
+  width,
 }) {
   return (
     <Button
@@ -19,8 +20,15 @@ export default function CustomButton2({
       iconContainerStyle={iconContainerStyle}
       iconPosition={iconPosition}
       titleStyle={{ ...styles.titleStyle, ...titleStyle }}
-      buttonStyle={{ ...styles.buttonStyle, ...buttonStyle }}
-      containerStyle={containerStyle}
+      buttonStyle={{
+        ...styles.buttonStyle,
+        width: width || styles.buttonStyle.width,
+        ...buttonStyle,
+      }}
+      containerStyle={{
+        ...styles.containerStyle,
+        ...containerStyle,
+      }}
       onPress={onPress}
     />
   );
@@ -35,7 +43,18 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.mainColor,
     paddingVertical: 15,
     borderRadius: 10,
-    width: 270,
+    width: '100%',
     height: 50,
+  },
+  containerStyle: {
+    height: 60,
+    // Android
+    elevation: 5,
+
+    // iOS
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
 });

@@ -15,4 +15,8 @@ export const schema = yup.object({
     .min(8, '비밀번호는 최소 8자리 이상으로 입력해주세요.')
     .max(20, '비밀번호는 최대 20자리로 입력해주세요.')
     .required('비밀번호는 필수 입력입니다.'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
+    .required('비밀번호 확인을 입력해주세요.'),
 });

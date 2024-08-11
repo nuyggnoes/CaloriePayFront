@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     // borderWidth: 1,
-    // paddingVertical: 10,
+    // paddingVertical: 4,
   },
   inputContainerStyle: {
     borderBottomWidth: 0,
