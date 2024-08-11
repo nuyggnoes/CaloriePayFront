@@ -12,7 +12,7 @@ export default function SignUpHeader(props) {
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>
       <TouchableOpacity>
-        <Icon name="chevron-left" onPress={navigation.goBack} />
+        <Icon name="chevron-left" onPress={navigation.goBack} size={30} />
       </TouchableOpacity>
     </View>
   );

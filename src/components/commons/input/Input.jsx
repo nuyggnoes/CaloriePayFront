@@ -10,7 +10,7 @@ export default function CustomInput({
   errorMessage,
   onChange,
   value,
-  onBlur,
+  secureTextEntry,
 }) {
   return (
     <View style={styles.container}>
@@ -24,6 +24,7 @@ export default function CustomInput({
         errorMessage={errorMessage}
         onChangeText={onChange}
         value={value}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );
@@ -31,17 +32,16 @@ export default function CustomInput({
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    width: 330,
-    borderWidth: 1,
-    paddingVertical: 10,
+    width: '100%',
+    // borderWidth: 1,
+    // paddingVertical: 10,
   },
   inputContainerStyle: {
     borderBottomWidth: 0,
     borderRadius: 12,
     backgroundColor: globalStyles.gray,
     paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingVertical: 8,
   },
   labelStyle: {
     marginBottom: 10,
