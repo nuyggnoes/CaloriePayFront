@@ -43,11 +43,12 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.mainColor,
     paddingVertical: 15,
     borderRadius: 10,
-    width: '100%',
     height: 50,
   },
   containerStyle: {
     height: 60,
+    width: '100%',
+    paddingHorizontal: 10,
     // Android
     elevation: 5,
 

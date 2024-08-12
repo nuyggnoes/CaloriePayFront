@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const schema = yup.object({
+export const userPersonalSchema = yup.object({
   name: yup.string().required('이름을 입력해주세요.'),
   phoneNumber: yup
     .string()
@@ -19,4 +19,10 @@ export const schema = yup.object({
     .string()
     .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
     .required('비밀번호 확인을 입력해주세요.'),
+});
+
+export const userPhysicalSchema = yup.object({
+  age: yup.string().required('나이를 입력해주세요.'),
+  height: yup.string().required('키를 입력해주세요.'),
+  weight: yup.string().required('몸무게를 입력해주세요.'),
 });

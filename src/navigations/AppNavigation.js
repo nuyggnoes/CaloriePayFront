@@ -18,6 +18,7 @@ import { useState } from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
 import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
+import SignUpPhysicalInfoScreen from '../screens/auth/signup/SignUpPhysicalInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,6 +99,10 @@ const AuthStackNavigator = () => {
       <Stack.Screen
         name="signUpPersonInfo"
         component={SignUpPersonInfoScreen}
+      />
+      <Stack.Screen
+        name="signUpPhysicalInfo"
+        component={SignUpPhysicalInfoScreen}
       />
     </Stack.Navigator>
   );

@@ -8,13 +8,14 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SignUpHeader from '../header/SignUpHeader';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 export default function SignUpWrapper(props) {
   return (
     <GestureHandlerRootView>
       <SafeAreaView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
+          <View style={{ paddingHorizontal: 16, height: '100%' }}>
             <SignUpHeader title={props.title} />
             <KeyboardAwareScrollView
               contentContainerStyle={{
@@ -35,8 +36,9 @@ export default function SignUpWrapper(props) {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     alignItems: 'center',
-    marginBottom: 80,
+    justifyContent: 'space-between',
   },
 });
