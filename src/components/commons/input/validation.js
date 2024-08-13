@@ -26,3 +26,7 @@ export const userPhysicalSchema = yup.object({
   height: yup.string().required('키를 입력해주세요.'),
   weight: yup.string().required('몸무게를 입력해주세요.'),
 });
+
+export const userGoalSchema = yup.object({
+  targetWeight: yup.string().required('목표 체중을 입력해주세요.'),
+});

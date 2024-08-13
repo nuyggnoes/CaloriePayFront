@@ -17,7 +17,7 @@ export default function CustomButton({
     <Button
       title={title}
       icon={icon}
-      iconContainerStyle={iconContainerStyle}
+      iconContainerStyle={styles.iconContainerStyle}
       iconPosition={iconPosition}
       titleStyle={{ ...styles.titleStyle, ...titleStyle }}
       buttonStyle={{
@@ -57,5 +57,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
+  },
+  iconContainerStyle: {
+    // marginRight: 10,
   },
 });

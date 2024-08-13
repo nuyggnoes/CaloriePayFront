@@ -25,25 +25,34 @@ export default function InitialScreen() {
       </View>
       <View style={styles.buttonContainer}>
         <CustomButton
-          title="이메일로 회원가입"
+          title="카카오 로그인"
+          titleStyle={styles.kakaoText}
+          icon={{
+            name: 'comment',
+            type: 'font-awesome',
+            size: 21,
+            color: globalStyles.kakaoIconColor,
+          }}
+          buttonStyle={{
+            backgroundColor: globalStyles.kakaoContainerColor,
+          }}
+        />
+        <CustomButton
+          title="이메일 로그인"
           icon={{
             name: 'envelope',
             type: 'font-awesome',
             size: 21,
             color: 'white',
           }}
-          iconContainerStyle={{
-            marginRight: 10,
-          }}
+        />
+        <Text style={styles.subLoginText}>아직 회원이 아니신가요?</Text>
+        <TouchableOpacity
           onPress={() => {
-            //   Alert.alert('CUSTOM_BUTTON');
-            console.log('register');
             navigation.navigate('signUpPersonInfo');
           }}
-        />
-        <Text style={styles.subLoginText}>이미 회원이신가요?</Text>
-        <TouchableOpacity>
-          <Text style={styles.loginText}>로그인</Text>
+        >
+          <Text style={styles.loginText}>회원가입</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -69,5 +78,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 4,
     color: globalStyles.loginTextColor,
+  },
+  kakaoText: {
+    color: 'black',
   },
 });

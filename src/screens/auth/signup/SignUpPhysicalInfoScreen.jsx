@@ -15,7 +15,7 @@ export default function SignUpPhysicalInfoScreen(props) {
   console.log('render');
   const navigation = useNavigation();
   const route = useRoute();
-  const { filteredData } = route.params;
+  const { personalData } = route.params;
 
   const [selectedGender, setSelectedGender] = useState(0);
   const {
@@ -31,10 +31,11 @@ export default function SignUpPhysicalInfoScreen(props) {
     const updatedData = {
       ...data,
       gender: selectedGender === 0 ? 'male' : 'female',
-      ...filteredData,
+      ...personalData,
     };
     console.log('updateData');
     console.log(updatedData);
+    navigation.navigate('signUpGoalInfo', { updatedData });
     // checkUser api 호출
     // try {
     //   const response = await checkUser(filteredData);
@@ -77,6 +78,8 @@ export default function SignUpPhysicalInfoScreen(props) {
           buttons={['남자', '여자']}
           selectedIndex={selectedGender}
           setSelectedIndex={setSelectedGender}
+          isLabel={true}
+          labelText="성별"
         />
       </View>
 

@@ -14,14 +14,16 @@ import TestScreen2Page from '../screens/TestScreen2';
 import TestScreen3Page from '../screens/TestScreen3';
 import TestScreen4Page from '../screens/TestScreen4';
 import DetailPage from '../screens/Detail';
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
 import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
 import SignUpPhysicalInfoScreen from '../screens/auth/signup/SignUpPhysicalInfoScreen';
+import SignUpGoalInfoScreen from '../screens/auth/signup/SignUpGoalInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const AuthContext = createContext();
 
 const StackNavigator = () => {
   return (
@@ -104,6 +106,7 @@ const AuthStackNavigator = () => {
         name="signUpPhysicalInfo"
         component={SignUpPhysicalInfoScreen}
       />
+      <Stack.Screen name="signUpGoalInfo" component={SignUpGoalInfoScreen} />
     </Stack.Navigator>
   );
 };
@@ -111,8 +114,12 @@ const AuthStackNavigator = () => {
 export default function AppContainer() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <NavigationContainer>
-      {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
-    </NavigationContainer>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <NavigationContainer>
+        {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
+
+export const useAuth = () => useContext(AuthContext);

@@ -1,30 +1,31 @@
 import { ButtonGroup } from '@rneui/themed';
-import React, { useState } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { globalStyles } from '../../../styles/globalStyles';
 
 export default function CustomButtonGroup({
   buttons,
   containerStyle,
+  buttonStyle,
   selectedIndex,
   setSelectedIndex,
+  isLabel,
+  labelText,
 }) {
   return (
-    <ButtonGroup
-      buttons={[...buttons]}
-      selectedIndex={selectedIndex}
-      onPress={(value) => {
-        console.log(value);
-        setSelectedIndex(value);
-      }}
-      containerStyle={{ ...styles.containerStyle, ...containerStyle }}
-      buttonStyle={styles.buttonStyle}
-      selectedButtonStyle={styles.selectedButtonStyle}
-      buttonContainerStyle={{
-        borderWidth: 0,
-        backgroundColor: globalStyles.mainBackgroundColor,
-      }}
-    />
+    <View>
+      {isLabel ? <Text style={styles.labelText}>{labelText}</Text> : <></>}
+      <ButtonGroup
+        buttons={[...buttons]}
+        selectedIndex={selectedIndex}
+        onPress={(value) => {
+          setSelectedIndex(value);
+        }}
+        containerStyle={{ ...styles.containerStyle, ...containerStyle }}
+        buttonStyle={{ ...styles.buttonStyle, ...buttonStyle }}
+        selectedButtonStyle={styles.selectedButtonStyle}
+        innerBorderStyle={styles.innerBorderStyle}
+      />
+    </View>
   );
 }
 
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     height: 50,
     borderWidth: 0,
-    backgroundColor: 'yellow',
+    backgroundColor: globalStyles.mainBackgroundColor,
   },
   buttonStyle: {
     marginHorizontal: 10,
@@ -41,5 +42,14 @@ const styles = StyleSheet.create({
   },
   selectedButtonStyle: {
     backgroundColor: globalStyles.mainColor,
+  },
+  labelText: {
+    fontSize: 16,
+    fontWeight: '600',
+    paddingLeft: 10,
+    marginBottom: 10,
+  },
+  innerBorderStyle: {
+    width: 0,
   },
 });

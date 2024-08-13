@@ -22,10 +22,13 @@ export default function SignUpPersonInfoScreen() {
   });
   const onSubmit = async (data) => {
     const { email, name, phoneNumber } = data;
-    const filteredData = { email, name, phoneNumber };
+    const validationData = { email, name, phoneNumber };
+    const { confirmPassword, ...personalData } = data;
     console.log(data);
-    console.log(filteredData);
-    navigation.navigate('signUpPhysicalInfo', { filteredData: filteredData });
+    console.log(validationData);
+    navigation.navigate('signUpPhysicalInfo', {
+      personalData,
+    });
     // // checkUser api 호출
     // try {
     //   const response = await checkUser(filteredData);
