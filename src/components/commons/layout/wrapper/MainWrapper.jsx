@@ -34,7 +34,7 @@ export default function MainWrapper(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    padding: 15,
     marginBottom: 80,
   },
 });

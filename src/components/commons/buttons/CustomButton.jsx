@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     height: 60,
     width: '100%',
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     // Android
     elevation: 5,
 

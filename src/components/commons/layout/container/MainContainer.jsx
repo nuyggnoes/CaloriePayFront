@@ -11,5 +11,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     width: '100%',
+    padding: 12,
   },
 });

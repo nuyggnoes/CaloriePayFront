@@ -8,9 +8,11 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../navigations/AppNavigation';
 
 export default function InitialScreen() {
   const navigation = useNavigation();
+  const { setIsLoggedIn } = useAuth();
   return (
     <View
       style={{
@@ -44,6 +46,9 @@ export default function InitialScreen() {
             type: 'font-awesome',
             size: 21,
             color: 'white',
+          }}
+          onPress={() => {
+            setIsLoggedIn(true);
           }}
         />
         <Text style={styles.subLoginText}>아직 회원이 아니신가요?</Text>

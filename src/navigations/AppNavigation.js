@@ -9,6 +9,7 @@ import {
 } from 'react-native-heroicons/outline';
 import { globalStyles } from '../styles/globalStyles';
 // //////////////////////////////////////////////////////////////////
+import HomeScreen from '../screens/homeTab/HomeScreen';
 import TestScreen1Page from '../screens/TestScreen1';
 import TestScreen2Page from '../screens/TestScreen2';
 import TestScreen3Page from '../screens/TestScreen3';
@@ -28,11 +29,13 @@ const AuthContext = createContext();
 const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="test1" component={TestScreen1Page} />
       <Stack.Screen name="test2" component={TestScreen2Page} />
       <Stack.Screen name="test3" component={TestScreen3Page} />
       <Stack.Screen name="test4" component={TestScreen4Page} />
       <Stack.Screen name="detail" component={DetailPage} />
+      <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
     </Stack.Navigator>
   );
 };
@@ -82,7 +85,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="test4"
-        component={TestScreen2Page}
+        component={TestScreen4Page}
         options={{
           tabBarIcon: ({ color, size }) => (
             <EllipsisHorizontalIcon name="home" color={color} size={size} />
@@ -117,6 +120,7 @@ export default function AppContainer() {
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <NavigationContainer>
         {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
+        {/* {isLoggedIn ? <StackNavigator /> : <AuthStackNavigator />} */}
       </NavigationContainer>
     </AuthContext.Provider>
   );
