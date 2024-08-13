@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-const URL = 'base_url';
+const BASE_URL = 'base_url';
 
 export const getTokens = (email, password, navigation) => {
   axios
-    .post(`${URL}/api/login`, {
+    .post(`${BASE_URL}/api/login`, {
       email,
       password,
     })
@@ -44,5 +44,40 @@ export const verifyTokens = async (navigation) => {
   // 최초 접속
   if (Token === null) {
     navigation.reset({ routes: [{ name: 'AuthPage' }] });
+  }
+};
+
+// api Interceptor
+
+export const getAccessToken = async () => {
+  return await AsyncStorage.getItem('AccessToken');
+};
+
+export const getNewAccessToken = async () => {
+  const refreshToken = await AsyncStorage.getItem('RefreshToken');
+  if (refreshToken) {
+    try {
+      return (response = await axios.post(`${BASE_URL}/auth/refresh-token`));
+    } catch (err) {
+      return null;
+    }
+  }
+};
+
+export const saveTokens = async (accessToken, refreshToken) => {
+  try {
+    await AsyncStorage.setItem('AccessToken', accessToken);
+    await AsyncStorage.setItem('RefreshToken', refreshToken);
+  } catch (err) {
+    console.log('Error saving tokens : ', err);
+  }
+};
+
+export const removeTokens = async () => {
+  try {
+    await AsyncStorage.removeItem('AccessToken');
+    await AsyncStorage.removeItem('RefreshToken');
+  } catch (err) {
+    console.log('Error removing tokens : ', err);
   }
 };

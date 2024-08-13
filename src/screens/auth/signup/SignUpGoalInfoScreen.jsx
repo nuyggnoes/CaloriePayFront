@@ -10,6 +10,7 @@ import { userGoalSchema } from '../../../components/commons/input/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useAuth } from '../../../navigations/AppNavigation';
+import { joinUser } from '../../../api/userApi';
 
 export default function SignUpGoalInfoScreen() {
   const navigation = useNavigation();
@@ -19,6 +20,7 @@ export default function SignUpGoalInfoScreen() {
   const [activityLevel, setActivityLevel] = useState(0);
 
   const { setIsLoggedIn } = useAuth();
+  const { updatedData } = route.params;
   const {
     control,
     handleSubmit,
@@ -29,11 +31,13 @@ export default function SignUpGoalInfoScreen() {
   });
   const onSubmit = () => {
     console.log(goal, activityLevel);
+    const userData = { ...updatedData, goal, activityLevel };
+    console.log(userData);
     // navigation.navigate('test1');
+    // 회원가입 API 요청
+    // joinUser(userData);
     setIsLoggedIn(true);
   };
-  const { updatedData } = route.params;
-  console.log(updatedData);
   return (
     <View style={{ height: '100%', paddingBottom: 30 }}>
       <SignUpWrapper title="사용자 개인 설정">

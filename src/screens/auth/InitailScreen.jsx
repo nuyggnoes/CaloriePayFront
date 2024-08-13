@@ -9,6 +9,7 @@ import {
 } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../navigations/AppNavigation';
+import { getAccessToken } from '../../utils/jwt/tokenUtils';
 
 export default function InitialScreen() {
   const navigation = useNavigation();

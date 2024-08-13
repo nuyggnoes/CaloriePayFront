@@ -24,7 +24,7 @@ export default function HomeScreen() {
       <MainContainer>
         <Text>이번주 칼로리 소비 내역</Text>
         <View>
-          <CalendarStrip
+          {/* <CalendarStrip
             selectedDate={selectedDate}
             onPressDate={(date) => {
               setSelectedDate(date);
@@ -36,7 +36,7 @@ export default function HomeScreen() {
               '2024-08-24',
             ]}
             weekStartsOn={1} // 0,1,2,3,4,5,6 for S M T W T F S, defaults to 0
-          />
+          /> */}
         </View>
       </MainContainer>
     </MainWrapper>
