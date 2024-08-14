@@ -22,11 +22,23 @@ export const userPersonalSchema = yup.object({
 });
 
 export const userPhysicalSchema = yup.object({
-  age: yup.string().required('나이를 입력해주세요.'),
-  height: yup.string().required('키를 입력해주세요.'),
-  weight: yup.string().required('몸무게를 입력해주세요.'),
+  age: yup
+    .string()
+    .matches(/^\d+$/, '나이는 숫자만 입력할 수 있습니다.')
+    .required('나이를 입력해주세요.'),
+  height: yup
+    .string()
+    .matches(/^\d+$/, '키는 숫자만 입력할 수 있습니다.')
+    .required('키를 입력해주세요.'),
+  weight: yup
+    .string()
+    .matches(/^\d+$/, '몸무게는 숫자만 입력할 수 있습니다.')
+    .required('몸무게를 입력해주세요.'),
 });
 
 export const userGoalSchema = yup.object({
-  targetWeight: yup.string().required('목표 체중을 입력해주세요.'),
+  targetWeight: yup
+    .string()
+    .matches(/^\d+$/, '몸무게는 숫자만 입력할 수 있습니다.')
+    .required('목표 체중을 입력해주세요.'),
 });
