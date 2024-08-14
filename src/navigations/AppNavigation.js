@@ -8,34 +8,51 @@ import {
   EllipsisHorizontalIcon,
 } from 'react-native-heroicons/outline';
 import { globalStyles } from '../styles/globalStyles';
-// //////////////////////////////////////////////////////////////////
-import HomeScreen from '../screens/homeTab/HomeScreen';
-import TestScreen1Page from '../screens/TestScreen1';
-import TestScreen2Page from '../screens/TestScreen2';
-import TestScreen3Page from '../screens/TestScreen3';
-import TestScreen4Page from '../screens/TestScreen4';
-import DetailPage from '../screens/Detail';
+import HomeScreen from '../screens/homeStack/HomeScreen';
+import DetailScreen from '../screens/homeStack/DetailScreen';
 import { useState, createContext, useContext } from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
 import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
 import SignUpPhysicalInfoScreen from '../screens/auth/signup/SignUpPhysicalInfoScreen';
 import SignUpGoalInfoScreen from '../screens/auth/signup/SignUpGoalInfoScreen';
+import SocialScreen from '../screens/socialStack/SocialScreen';
+import MyDataScreen from '../screens/myDataStack/MyDataScreen';
+import SeeMoreScreen from '../screens/seeMoreStack/SeeMoreScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const AuthContext = createContext();
 
-const StackNavigator = () => {
+const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: true }}>
+    <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="test1" component={TestScreen1Page} />
-      <Stack.Screen name="test2" component={TestScreen2Page} />
-      <Stack.Screen name="test3" component={TestScreen3Page} />
-      <Stack.Screen name="test4" component={TestScreen4Page} />
-      <Stack.Screen name="detail" component={DetailPage} />
-      <Stack.Screen name="AuthNav" component={AuthStackNavigator} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const SocialStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Social" component={SocialScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const MyDataStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="MyData" component={MyDataScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const SeeMoreStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="SeeMore" component={SeeMoreScreen} />
     </Stack.Navigator>
   );
 };
@@ -57,8 +74,8 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="main"
-        component={StackNavigator}
+        name="HomeTab"
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <HomeIcon name="home" color={color} size={size} />
@@ -66,26 +83,26 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="test2"
-        component={TestScreen2Page}
+        name="SocialTab"
+        component={SocialStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <ChartBarIcon name="home" color={color} size={size} />
+            <ChartBarIcon name="chartBar" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="test3"
-        component={TestScreen2Page}
+        name="MyDataTab"
+        component={MyDataStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <UserIcon name="home" color={color} size={size} />
+            <UserIcon name="user" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="test4"
-        component={TestScreen4Page}
+        name="SeeMoreTab"
+        component={SeeMoreStackNavigator}
         options={{
           tabBarIcon: ({ color, size }) => (
             <EllipsisHorizontalIcon name="home" color={color} size={size} />
@@ -115,12 +132,11 @@ const AuthStackNavigator = () => {
 };
 
 export default function AppContainer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <NavigationContainer>
         {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
-        {/* {isLoggedIn ? <StackNavigator /> : <AuthStackNavigator />} */}
       </NavigationContainer>
     </AuthContext.Provider>
   );

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import MainWrapper from '../components/commons/layout/wrapper/MainWrapper';
-import { useAuth } from '../navigations/AppNavigation';
-export default function DetailPage() {
+import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
+import { useAuth } from '../../navigations/AppNavigation';
+export default function DetailScreen() {
   const { setIsLoggedIn } = useAuth();
   return (
     <MainWrapper>
