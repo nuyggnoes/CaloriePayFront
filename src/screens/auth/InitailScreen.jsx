@@ -49,7 +49,8 @@ export default function InitialScreen() {
             color: 'white',
           }}
           onPress={() => {
-            setIsLoggedIn(true);
+            // setIsLoggedIn(true);
+            navigation.navigate('login');
           }}
         />
         <Text style={styles.subLoginText}>아직 회원이 아니신가요?</Text>

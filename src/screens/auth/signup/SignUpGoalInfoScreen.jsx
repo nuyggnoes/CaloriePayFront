@@ -40,7 +40,11 @@ export default function SignUpGoalInfoScreen() {
   };
   return (
     <View style={{ height: '100%', paddingBottom: 30 }}>
-      <SignUpWrapper title="사용자 개인 설정">
+      <SignUpWrapper
+        title="사용자 개인 설정"
+        buttonText="완료"
+        onPress={handleSubmit(onSubmit)}
+      >
         <View style={{ width: '100%' }}>
           <CustomButtonGroup
             buttons={['다이어트', '유지어트']}
@@ -86,7 +90,6 @@ export default function SignUpGoalInfoScreen() {
           <Text>내 키의 정상 체중범위</Text>
         </View>
       </SignUpWrapper>
-      <CustomButton title="완료" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }

@@ -132,7 +132,7 @@ const AuthStackNavigator = () => {
 };
 
 export default function AppContainer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <NavigationContainer>

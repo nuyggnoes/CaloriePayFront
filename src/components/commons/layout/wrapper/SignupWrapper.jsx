@@ -9,6 +9,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SignUpHeader from '../header/SignUpHeader';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
+import CustomButton from '../../buttons/CustomButton';
 
 export default function SignUpWrapper(props) {
   return (
@@ -27,6 +28,7 @@ export default function SignUpWrapper(props) {
             >
               <View style={styles.container}>{props.children}</View>
             </KeyboardAwareScrollView>
+            <CustomButton title={props.buttonText} onPress={props.onPress} />
           </View>
         </TouchableWithoutFeedback>
       </SafeAreaView>
@@ -39,6 +41,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
 });

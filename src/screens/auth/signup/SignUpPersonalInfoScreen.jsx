@@ -44,47 +44,48 @@ export default function SignUpPersonInfoScreen() {
   console.log(errors);
 
   return (
-    <SignUpWrapper title="회원가입">
-      <View style={{ width: '100%' }}>
-        <InputField
-          control={control}
-          name="name"
-          title="이름"
-          placeholder="이름을 입력해주세요"
-          errors={errors}
-        />
-        <InputField
-          control={control}
-          name="phoneNumber"
-          title="전화번호"
-          placeholder="전화번호를 입력해주세요"
-          errors={errors}
-        />
-        <InputField
-          control={control}
-          name="email"
-          title="e-mail"
-          placeholder="이메일을 입력해주세요"
-          errors={errors}
-        />
-        <InputField
-          control={control}
-          name="password"
-          title="비밀번호"
-          placeholder="비밀번호을 입력해주세요"
-          secureTextEntry={true}
-          errors={errors}
-        />
-        <InputField
-          control={control}
-          name="confirmPassword"
-          title="비밀번호 확인"
-          placeholder="비밀번호를 다시 입력해주세요"
-          secureTextEntry={true}
-          errors={errors}
-        />
-      </View>
-      <CustomButton title="다음" onPress={handleSubmit(onSubmit)} />
+    <SignUpWrapper
+      title="회원가입"
+      buttonText="다음"
+      onPress={handleSubmit(onSubmit)}
+    >
+      <InputField
+        control={control}
+        name="name"
+        title="이름"
+        placeholder="이름을 입력해주세요"
+        errors={errors}
+      />
+      <InputField
+        control={control}
+        name="phoneNumber"
+        title="전화번호"
+        placeholder="전화번호를 입력해주세요"
+        errors={errors}
+      />
+      <InputField
+        control={control}
+        name="email"
+        title="e-mail"
+        placeholder="이메일을 입력해주세요"
+        errors={errors}
+      />
+      <InputField
+        control={control}
+        name="password"
+        title="비밀번호"
+        placeholder="비밀번호을 입력해주세요"
+        secureTextEntry={true}
+        errors={errors}
+      />
+      <InputField
+        control={control}
+        name="confirmPassword"
+        title="비밀번호 확인"
+        placeholder="비밀번호를 다시 입력해주세요"
+        secureTextEntry={true}
+        errors={errors}
+      />
     </SignUpWrapper>
   );
 }

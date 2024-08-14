@@ -51,7 +51,11 @@ export default function SignUpPhysicalInfoScreen(props) {
   console.log(errors);
 
   return (
-    <SignUpWrapper title="사용자정보 등록">
+    <SignUpWrapper
+      title="사용자정보 등록"
+      buttonText="다음"
+      onPress={handleSubmit(onSubmit)}
+    >
       <View style={{ width: '100%' }}>
         <InputField
           control={control}
@@ -83,7 +87,7 @@ export default function SignUpPhysicalInfoScreen(props) {
         />
       </View>
 
-      <CustomButton title="다음" onPress={handleSubmit(onSubmit)} />
+      {/* <CustomButton title="다음" onPress={handleSubmit(onSubmit)} /> */}
     </SignUpWrapper>
   );
 }
