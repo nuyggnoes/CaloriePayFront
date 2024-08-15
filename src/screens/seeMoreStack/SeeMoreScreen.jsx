@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity } from 'react-native';
-import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
-import { useAuth } from '../../navigations/AppNavigation';
+import { Text, TouchableOpacity } from "react-native";
+import MainWrapper from "../../components/commons/layout/wrapper/MainWrapper";
+import { useAuth } from "../../navigations/AppNavigation";
 
 export default function SeeMoreScreen() {
   const { setIsLoggedIn } = useAuth();

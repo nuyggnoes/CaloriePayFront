@@ -1,11 +1,11 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import SignUpWrapper from '../../components/commons/layout/wrapper/SignupWrapper';
-import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
-import InputField from '../../components/commons/input/InputField';
-import CustomButton from '../../components/commons/buttons/CustomButton';
-import { globalStyles } from '../../styles/globalStyles';
-import SignUpText from '../../components/commons/text/SignUpText';
+import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import SignUpWrapper from "../../components/commons/layout/wrapper/SignupWrapper";
+import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
+import InputField from "../../components/commons/input/InputField";
+import CustomButton from "../../components/commons/buttons/CustomButton";
+import { globalStyles } from "../../styles/globalStyles";
+import SignUpText from "../../components/commons/text/SignUpText";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -20,7 +20,7 @@ export default function LoginScreen() {
   };
   return (
     <SignUpWrapper title="로그인" buttonText="로그인">
-      <View style={{ width: '100%', marginTop: 30 }}>
+      <View style={{ width: "100%", marginTop: 30 }}>
         <InputField
           control={control}
           name="email"
@@ -46,24 +46,24 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   buttonContainer: {
     flex: 1.3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   subLoginText: {
     color: globalStyles.subLoginTextColor,
     marginTop: 16,
   },
   loginText: {
-    fontWeight: '800',
+    fontWeight: "800",
     fontSize: 14,
     marginTop: 4,
     color: globalStyles.loginTextColor,
   },
   kakaoText: {
-    color: 'black',
+    color: "black",
   },
 });
