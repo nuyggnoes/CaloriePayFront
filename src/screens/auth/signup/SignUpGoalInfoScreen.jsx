@@ -20,6 +20,7 @@ export default function SignUpGoalInfoScreen() {
   const [activityLevel, setActivityLevel] = useState(0);
 
   const { setIsLoggedIn } = useAuth();
+
   const { updatedData } = route.params;
   const {
     control,

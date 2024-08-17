@@ -19,6 +19,9 @@ import SignUpGoalInfoScreen from '../screens/auth/signup/SignUpGoalInfoScreen';
 import SocialScreen from '../screens/socialStack/SocialScreen';
 import MyDataScreen from '../screens/myDataStack/MyDataScreen';
 import SeeMoreScreen from '../screens/seeMoreStack/SeeMoreScreen';
+// import { AuthProvider } from '../context/authContext';
+// bottom sheet
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -135,9 +138,11 @@ export default function AppContainer() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      {/* <BottomSheetModalProvider> */}
       <NavigationContainer>
         {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
       </NavigationContainer>
+      {/* </BottomSheetModalProvider> */}
     </AuthContext.Provider>
   );
 }

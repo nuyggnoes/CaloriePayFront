@@ -9,24 +9,28 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { globalStyles } from '../../../../styles/globalStyles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../header/Header';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function MainWrapper(props) {
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <KeyboardAwareScrollView
-            contentContainerStyle={{
-              flexGrow: 1,
-            }}
-            enableAutomaticScroll={true}
-            showsVerticalScrollIndicator={false}
-            extraHeight={100}
-          >
-            <View style={styles.container}>{props.children}</View>
-          </KeyboardAwareScrollView>
-        </TouchableWithoutFeedback>
-      </SafeAreaView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <SafeAreaView style={{ flex: 1 }}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <KeyboardAwareScrollView
+              contentContainerStyle={{
+                flexGrow: 1,
+              }}
+              enableAutomaticScroll={true}
+              showsVerticalScrollIndicator={false}
+              extraHeight={100}
+              style={{ flex: 1 }}
+            >
+              <View style={styles.container}>{props.children}</View>
+            </KeyboardAwareScrollView>
+          </TouchableWithoutFeedback>
+        </SafeAreaView>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }
