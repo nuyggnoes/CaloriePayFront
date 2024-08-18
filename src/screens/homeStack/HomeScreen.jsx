@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
 import MainContainer from '../../components/commons/layout/container/MainContainer';
 import CustomButton from '../../components/commons/buttons/CustomButton';
-import CalendarStrip from 'react-native-slideable-calendar-strip';
+import CalendarStrip from 'react-native-calendar-strip';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { globalStyles } from '../../styles/globalStyles';
@@ -64,6 +64,7 @@ export default function HomeScreen() {
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
   );
+
   return (
     <>
       <MainWrapper>
@@ -79,19 +80,21 @@ export default function HomeScreen() {
         <MainContainer>
           <Text>이번주 칼로리 소비 내역</Text>
           <View>
-            {/* <CalendarStrip
-            selectedDate={selectedDate}
-            onPressDate={(date) => {
-              setSelectedDate(date);
-            }}
-            markedDate={[
-              '2024-08-04',
-              '2024-08-05',
-              '2024-08-14',
-              '2024-08-24',
-            ]}
-            weekStartsOn={1} // 0,1,2,3,4,5,6 for S M T W T F S, defaults to 0
-          /> */}
+            <CalendarStrip
+              leftSelector={[]}
+              rightSelector={[]}
+              calendarHeaderStyle={{ display: 'none' }}
+              locale={{
+                name: 'ko',
+                config: {
+                  months:
+                    '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split(
+                      '_',
+                    ),
+                  weekdaysShort: '일_월_화_수_목_금_토'.split('_'),
+                },
+              }}
+            />
           </View>
         </MainContainer>
         <BottomSheetModal

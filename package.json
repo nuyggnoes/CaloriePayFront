@@ -28,6 +28,7 @@
     "react": "18.2.0",
     "react-hook-form": "^7.52.2",
     "react-native": "^0.74.2",
+    "react-native-calendar-strip": "^2.2.6",
     "react-native-calendars": "^1.1305.0",
     "react-native-gesture-handler": "2.16.1",
     "react-native-heroicons": "^4.0.0",
