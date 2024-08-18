@@ -9,12 +9,14 @@ import {
 } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
 import { getAccessToken } from '../../utils/jwt/tokenUtils';
-import { useAuth } from '../../navigations/AppNavigation';
+import { useAuth } from '../../context/authContext';
+
+// import { useAuth } from '../../navigations/AppNavigation';
 
 export default function InitialScreen() {
   const navigation = useNavigation();
-  const { setIsLoggedIn } = useAuth();
-
+  // const { setIsLoggedIn } = useAuth();
+  const { logIn } = useAuth();
   return (
     <View
       style={{
@@ -41,7 +43,7 @@ export default function InitialScreen() {
             backgroundColor: globalStyles.kakaoContainerColor,
           }}
           onPress={() => {
-            setIsLoggedIn(true);
+            logIn();
           }}
         />
         <CustomButton

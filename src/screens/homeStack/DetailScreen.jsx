@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
-import { useAuth } from '../../navigations/AppNavigation';
+import { useAuth } from '../../context/authContext';
+
 export default function DetailScreen() {
-  const { setIsLoggedIn } = useAuth();
+  const { logOut } = useAuth();
   return (
     <MainWrapper>
       <View style={styles.container}>
         <Text>Detail</Text>
         <TouchableOpacity
           onPressOut={() => {
-            setIsLoggedIn(false);
+            logOut();
           }}
         >
           <Text>RESET BUTTON</Text>

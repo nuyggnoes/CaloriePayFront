@@ -9,7 +9,7 @@ import InputField from '../../../components/commons/input/InputField';
 import { userGoalSchema } from '../../../components/commons/input/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useAuth } from '../../../navigations/AppNavigation';
+import { useAuth } from '../../../context/authContext';
 import { joinUser } from '../../../api/userApi';
 
 export default function SignUpGoalInfoScreen() {
@@ -19,7 +19,7 @@ export default function SignUpGoalInfoScreen() {
   const [goal, setGoal] = useState(0);
   const [activityLevel, setActivityLevel] = useState(0);
 
-  const { setIsLoggedIn } = useAuth();
+  const { logIn } = useAuth();
 
   const { updatedData } = route.params;
   const {
@@ -37,7 +37,7 @@ export default function SignUpGoalInfoScreen() {
     // navigation.navigate('test1');
     // 회원가입 API 요청
     // joinUser(userData);
-    setIsLoggedIn(true);
+    logIn();
   };
   return (
     <View style={{ height: '100%', paddingBottom: 30 }}>

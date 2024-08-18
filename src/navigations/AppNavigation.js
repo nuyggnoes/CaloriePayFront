@@ -10,7 +10,6 @@ import {
 import { globalStyles } from '../styles/globalStyles';
 import HomeScreen from '../screens/homeStack/HomeScreen';
 import DetailScreen from '../screens/homeStack/DetailScreen';
-import { useState, createContext, useContext } from 'react';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
 import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
@@ -19,13 +18,10 @@ import SignUpGoalInfoScreen from '../screens/auth/signup/SignUpGoalInfoScreen';
 import SocialScreen from '../screens/socialStack/SocialScreen';
 import MyDataScreen from '../screens/myDataStack/MyDataScreen';
 import SeeMoreScreen from '../screens/seeMoreStack/SeeMoreScreen';
-// import { AuthProvider } from '../context/authContext';
-// bottom sheet
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { AuthProvider, useAuth } from '../context/authContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const AuthContext = createContext();
 
 const HomeStackNavigator = () => {
   return (
@@ -134,17 +130,20 @@ const AuthStackNavigator = () => {
   );
 };
 
-export default function AppContainer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const MainNavigation = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      {/* <BottomSheetModalProvider> */}
-      <NavigationContainer>
-        {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
-      </NavigationContainer>
-      {/* </BottomSheetModalProvider> */}
-    </AuthContext.Provider>
+    <NavigationContainer>
+      {isLoggedIn ? <BottomTabNavigator /> : <AuthStackNavigator />}
+    </NavigationContainer>
+  );
+};
+
+export default function AppContainer() {
+  return (
+    <AuthProvider>
+      <MainNavigation />
+    </AuthProvider>
   );
 }
-
-export const useAuth = () => useContext(AuthContext);

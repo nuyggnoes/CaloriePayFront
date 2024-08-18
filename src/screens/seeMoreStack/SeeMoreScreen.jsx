@@ -1,14 +1,14 @@
-import { Text, TouchableOpacity } from "react-native";
-import MainWrapper from "../../components/commons/layout/wrapper/MainWrapper";
-import { useAuth } from "../../navigations/AppNavigation";
+import { Text, TouchableOpacity } from 'react-native';
+import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
+import { useAuth } from '../../context/authContext';
 
 export default function SeeMoreScreen() {
-  const { setIsLoggedIn } = useAuth();
+  const { logOut } = useAuth();
   return (
     <MainWrapper>
       <TouchableOpacity
         onPress={() => {
-          setIsLoggedIn(false);
+          logOut();
         }}
       >
         <Text>SeeMoreScreen</Text>
