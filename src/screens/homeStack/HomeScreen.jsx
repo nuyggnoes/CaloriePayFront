@@ -6,8 +6,10 @@ import CalendarStrip from 'react-native-slideable-calendar-strip';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { globalStyles } from '../../styles/globalStyles';
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
 // bottom sheet
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+
+import { ChevronUpIcon, ChevronDownIcon } from 'react-native-heroicons/solid';
 
 // ======= phone =======
 import * as Contacts from 'expo-contacts';
@@ -18,8 +20,9 @@ import { CalendarList, Calendar } from 'react-native-calendars';
 // =========================
 
 export default function HomeScreen() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // bottom sheet modal
-  useEffect(async () => {
+  useEffect(() => {
     handlePresentModalPress();
 
     // phone
@@ -54,6 +57,7 @@ export default function HomeScreen() {
   }, []);
   const handleSheetChanges = useCallback((index) => {
     console.log('handleSheetChanges', index);
+    setIsModalOpen(index > 0);
   }, []);
 
   // bottom sheet modal
@@ -97,7 +101,7 @@ export default function HomeScreen() {
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
           enablePanDownToClose={false}
-          handleComponent={renderCustomHandle}
+          handleComponent={() => renderCustomHandle(isModalOpen)}
         >
           <View style={styles.contentContainer}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -118,9 +122,16 @@ export default function HomeScreen() {
     </>
   );
 }
-const renderCustomHandle = () => (
+const renderCustomHandle = (isModalOpen) => (
   <View style={styles.customHandle}>
-    <Text style={styles.customHandleText}>Daily Report</Text>
+    <Text style={styles.customHandleText}>
+      Daily Report{' '}
+      {isModalOpen ? (
+        <ChevronDownIcon color={'white'} />
+      ) : (
+        <ChevronUpIcon color={'white'} />
+      )}
+    </Text>
   </View>
 );
 const styles = StyleSheet.create({
