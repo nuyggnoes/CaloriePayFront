@@ -9,11 +9,44 @@ import { globalStyles } from '../../styles/globalStyles';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 // bottom sheet
 
+// ======= phone =======
+import * as Contacts from 'expo-contacts';
+// =====================
+
+// ======= calendar =======
+import { CalendarList, Calendar } from 'react-native-calendars';
+// =========================
+
 export default function HomeScreen() {
   // bottom sheet modal
-  useEffect(() => {
+  useEffect(async () => {
     handlePresentModalPress();
-  });
+
+    // phone
+    const fetchContacts = async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
+        });
+
+        if (data.length > 0) {
+          data.forEach((contact) => {
+            console.log('Name:', contact.name);
+            if (contact.phoneNumbers) {
+              contact.phoneNumbers.forEach((phone) => {
+                console.log('Phone Number:', phone.number);
+              });
+            }
+            console.log('-------------------------');
+          });
+        }
+      }
+    };
+
+    fetchContacts();
+  }, []);
+
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ['20%', '100%'], []);
   const handlePresentModalPress = useCallback(() => {
