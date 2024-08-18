@@ -9,14 +9,13 @@ import { globalStyles } from '../../styles/globalStyles';
 // bottom sheet
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 
-import { ChevronUpIcon, ChevronDownIcon } from 'react-native-heroicons/solid';
-
 // ======= phone =======
 import * as Contacts from 'expo-contacts';
 // =====================
 
 // ======= calendar =======
 import { CalendarList, Calendar } from 'react-native-calendars';
+import { BottomModalHeader } from '../../components/units/BottomModalHeader';
 // =========================
 
 export default function HomeScreen() {
@@ -101,7 +100,7 @@ export default function HomeScreen() {
           snapPoints={snapPoints}
           onChange={handleSheetChanges}
           enablePanDownToClose={false}
-          handleComponent={() => renderCustomHandle(isModalOpen)}
+          handleComponent={() => BottomModalHeader(isModalOpen)}
         >
           <View style={styles.contentContainer}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -122,50 +121,19 @@ export default function HomeScreen() {
     </>
   );
 }
-const renderCustomHandle = (isModalOpen) => (
-  <View style={styles.customHandle}>
-    <Text style={styles.customHandleText}>
-      Daily Report{' '}
-      {isModalOpen ? (
-        <ChevronDownIcon color={'white'} />
-      ) : (
-        <ChevronUpIcon color={'white'} />
-      )}
-    </Text>
-  </View>
-);
+
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     backgroundColor: globalStyles.mainBackgroundColor,
     alignItems: 'center',
   },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    color: 'white',
-  },
-  customHandle: {
-    width: '100%',
-    height: 70,
-    backgroundColor: globalStyles.mainColor,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-  },
-  customHandleText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-  },
   scrollViewContent: {
     padding: 16,
+    paddingBottom: 100,
   },
   scrollText: {
-    fontSize: 18,
+    fontSize: 50,
     marginBottom: 10,
   },
 });
