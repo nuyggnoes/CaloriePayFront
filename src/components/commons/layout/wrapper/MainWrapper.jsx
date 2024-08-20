@@ -6,9 +6,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { globalStyles } from '../../../../styles/globalStyles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Header from '../header/Header';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function MainWrapper(props) {
@@ -38,7 +36,7 @@ export default function MainWrapper(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
+    // padding: 15,
     marginBottom: 80,
   },
 });

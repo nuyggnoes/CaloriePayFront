@@ -90,6 +90,9 @@ export default function HomeScreen() {
       <MainWrapper>
         <MainContainer>
           <ProgressBar total={2100} used={780} />
+          <MainContainer backgroundColor="#4E5566" hasShadow={false}>
+            <Text style={{ color: 'white' }}>Calorie Score | 868점</Text>
+          </MainContainer>
         </MainContainer>
         <CustomButton title="메뉴 추천받기" />
         <MainContainer>

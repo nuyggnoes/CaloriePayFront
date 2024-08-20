@@ -12,8 +12,8 @@ export default function ProgressBar({ total, used }) {
         progress={progress}
         color="rgba(43, 47, 57, 1)"
         borderRadius={25}
-        height={12}
-        width={280}
+        height={10}
+        width={300}
         borderColor="gray"
         borderWidth={2}
       />

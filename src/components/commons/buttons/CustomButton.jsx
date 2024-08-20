@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { globalStyles } from '../../../styles/globalStyles';
 import { Button } from '@rneui/base';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 export default function CustomButton({
   title,
@@ -37,7 +38,6 @@ export default function CustomButton({
 const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: 'bold',
-    marginHorizontal: 40,
   },
   buttonStyle: {
     backgroundColor: globalStyles.mainColor,
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     height: 60,
-    width: '100%',
-    // paddingHorizontal: 10,
+    width: widthPercentageToDP(100),
+    paddingHorizontal: 16,
+
     // Android
     elevation: 5,
 
