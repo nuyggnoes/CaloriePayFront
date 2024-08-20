@@ -4,7 +4,6 @@ import MainContainer from '../../components/commons/layout/container/MainContain
 import CustomButton from '../../components/commons/buttons/CustomButton';
 import CalendarStrip from 'react-native-calendar-strip';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { format } from 'date-fns';
 import { globalStyles } from '../../styles/globalStyles';
 // bottom sheet
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -13,9 +12,8 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import * as Contacts from 'expo-contacts';
 // =====================
 
-// ======= calendar =======
-import { CalendarList, Calendar } from 'react-native-calendars';
 import { BottomModalHeader } from '../../components/units/BottomModalHeader';
+import WeeklyCalendar from '../../components/units/WeeklyCalendar';
 // =========================
 
 export default function HomeScreen() {
@@ -27,6 +25,8 @@ export default function HomeScreen() {
     // phone
     const fetchContacts = async () => {
       const { status } = await Contacts.requestPermissionsAsync();
+      console.log('status : ');
+      console.log(status);
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
           fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
@@ -49,6 +49,7 @@ export default function HomeScreen() {
     fetchContacts();
   }, []);
 
+  // bottom sheet modal
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ['20%', '100%'], []);
   const handlePresentModalPress = useCallback(() => {
@@ -59,11 +60,17 @@ export default function HomeScreen() {
     setIsModalOpen(index > 0);
   }, []);
 
-  // bottom sheet modal
+  // calendar
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const events = [
+    { date: '2024-08-22', title: 'Event 1' },
+    { date: '2024-08-24', title: 'Event 2' },
+  ];
 
-  const [selectedDate, setSelectedDate] = useState(
-    format(new Date(), 'yyyy-MM-dd'),
-  );
+  const markedDates = events.map((event) => ({
+    date: event.date,
+    dots: [{ color: 'red', selectedDotColor: 'blue' }],
+  }));
 
   return (
     <>
@@ -80,21 +87,7 @@ export default function HomeScreen() {
         <MainContainer>
           <Text>이번주 칼로리 소비 내역</Text>
           <View>
-            <CalendarStrip
-              leftSelector={[]}
-              rightSelector={[]}
-              calendarHeaderStyle={{ display: 'none' }}
-              locale={{
-                name: 'ko',
-                config: {
-                  months:
-                    '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split(
-                      '_',
-                    ),
-                  weekdaysShort: '일_월_화_수_목_금_토'.split('_'),
-                },
-              }}
-            />
+            <WeeklyCalendar />
           </View>
         </MainContainer>
         <BottomSheetModal
