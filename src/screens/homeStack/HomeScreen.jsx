@@ -16,6 +16,14 @@ import { BottomModalHeader } from '../../components/units/BottomModalHeader';
 import WeeklyCalendar from '../../components/units/WeeklyCalendar';
 // =========================
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+import * as Progress from 'react-native-progress';
+import ProgressBar from '../../components/commons/progressBar/ProgressBar';
+
 export default function HomeScreen() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // bottom sheet modal
@@ -72,16 +80,16 @@ export default function HomeScreen() {
     dots: [{ color: 'red', selectedDotColor: 'blue' }],
   }));
 
+  // progress
+  const total = 2100;
+  const used = 780;
+  const progress = used / total;
+
   return (
     <>
       <MainWrapper>
         <MainContainer>
-          <Text>|</Text>
-          <Text>|</Text>
-          <Text>|</Text>
-          <Text>|</Text>
-          <Text>|</Text>
-          <Text>|</Text>
+          <ProgressBar total={2100} used={780} />
         </MainContainer>
         <CustomButton title="메뉴 추천받기" />
         <MainContainer>
@@ -100,7 +108,9 @@ export default function HomeScreen() {
         >
           <View style={styles.contentContainer}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-              <Text style={styles.scrollText}>Item 1</Text>
+              <MainContainer>
+                <ProgressBar total={2100} used={780} />
+              </MainContainer>
               <Text style={styles.scrollText}>Item 2</Text>
               <Text style={styles.scrollText}>Item 3</Text>
               <Text style={styles.scrollText}>Item 4</Text>
@@ -122,11 +132,12 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     backgroundColor: globalStyles.mainBackgroundColor,
-    alignItems: 'center',
   },
   scrollViewContent: {
     padding: 16,
+    width: wp(100),
     paddingBottom: 100,
+    alignItems: 'center',
   },
   scrollText: {
     fontSize: 50,
