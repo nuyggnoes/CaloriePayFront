@@ -1,8 +1,13 @@
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
 import MainContainer from '../../components/commons/layout/container/MainContainer';
 import CustomButton from '../../components/commons/buttons/CustomButton';
-import CalendarStrip from 'react-native-calendar-strip';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { globalStyles } from '../../styles/globalStyles';
 // bottom sheet
@@ -21,39 +26,77 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import * as Progress from 'react-native-progress';
 import ProgressBar from '../../components/commons/progressBar/ProgressBar';
 
+import { LineChart } from 'react-native-chart-kit';
+import { useNavigation } from '@react-navigation/native';
+import { useLoading } from '../../context/loadingContext';
+import { getCalorieAndScore } from '../../api/calorieScoreApi';
+import { getCalendarTier } from '../../api/calendarApi';
+import { getStartAndEndOfWeek } from '../../utils/date';
+
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [username, setUsername] = useState(null);
+  const [recommendCal, setRecommendCal] = useState(null);
+  const [remainedCal, setRemainedCal] = useState(null);
+  const [calorieScore, setCalorieScore] = useState(null);
+  const [calendarTierData, setCalendarTierData] = useState([]);
   // bottom sheet modal
+
+  const { showLoading, hideLoading } = useLoading();
+
   useEffect(() => {
     handlePresentModalPress();
 
     // phone
     const fetchContacts = async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
-      console.log('status : ');
-      console.log(status);
-      if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
-        });
+      showLoading();
+      try {
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.random() * 1000 + 1000),
+        );
+        const { start, end } = getStartAndEndOfWeek();
+        const [calorieResponse, calendarResponse] = await Promise.all([
+          getCalorieAndScore(),
+          getCalendarTier({ start, end }),
+        ]);
+        setUsername(calorieResponse.name);
+        setRecommendCal(calorieResponse.recommendKcal);
+        setRemainedCal(calorieResponse.remainKcal);
+        setCalorieScore(calorieResponse.score);
+        setCalendarTierData(calorieResponse);
 
-        if (data.length > 0) {
-          data.forEach((contact) => {
-            console.log('Name:', contact.name);
-            if (contact.phoneNumbers) {
-              contact.phoneNumbers.forEach((phone) => {
-                console.log('Phone Number:', phone.number);
-              });
-            }
-            console.log('-------------------------');
+        // phone
+        const { status } = await Contacts.requestPermissionsAsync();
+        console.log('status : ');
+        console.log(status);
+
+        if (status === 'granted') {
+          const { data } = await Contacts.getContactsAsync({
+            fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
           });
+
+          if (data.length > 0) {
+            data.forEach((contact) => {
+              console.log('Name:', contact.name);
+              if (contact.phoneNumbers) {
+                contact.phoneNumbers.forEach((phone) => {
+                  console.log('Phone Number:', phone.number);
+                });
+              }
+              console.log('-------------------------');
+            });
+          }
         }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        hideLoading();
       }
     };
-
     fetchContacts();
   }, []);
 
@@ -68,22 +111,38 @@ export default function HomeScreen() {
     setIsModalOpen(index > 0);
   }, []);
 
-  // calendar
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const events = [
-    { date: '2024-08-22', title: 'Event 1' },
-    { date: '2024-08-24', title: 'Event 2' },
-  ];
-
-  const markedDates = events.map((event) => ({
-    date: event.date,
-    dots: [{ color: 'red', selectedDotColor: 'blue' }],
-  }));
-
   // progress
   const total = 2100;
   const used = 780;
   const progress = used / total;
+
+  // chart
+  const chartConfig = {
+    backgroundColor: 'white',
+    backgroundGradientFrom: 'white',
+    backgroundGradientTo: 'white',
+    decimalPlaces: 1,
+    color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+    propsForDots: {
+      r: '6',
+      strokeWidth: '2',
+      stroke: '#ffa726',
+    },
+  };
+  const data = {
+    labels: ['11.09', '11.16', '11.23', '11.30', '12.7', '12.14'],
+    datasets: [
+      {
+        data: [64.5, 64, 64, 63.6, 63, 65],
+        strokeWidth: 4, // optional
+      },
+    ],
+    legend: ['체중 변화'], // optional
+  };
 
   return (
     <>
@@ -100,6 +159,24 @@ export default function HomeScreen() {
           <View>
             <WeeklyCalendar />
           </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Calendar')}>
+            <Text>전체보기</Text>
+          </TouchableOpacity>
+        </MainContainer>
+        <MainContainer>
+          <Text>Bezier Line Chart</Text>
+          <LineChart
+            data={data}
+            width={330}
+            height={200}
+            yAxisSuffix="kg"
+            chartConfig={chartConfig}
+            // bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
+          />
         </MainContainer>
         <BottomSheetModal
           ref={bottomSheetModalRef}

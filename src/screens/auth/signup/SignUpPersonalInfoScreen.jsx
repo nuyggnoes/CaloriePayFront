@@ -26,19 +26,19 @@ export default function SignUpPersonInfoScreen() {
     const { confirmPassword, ...personalData } = data;
     console.log(data);
     console.log(validationData);
-    navigation.navigate('signUpPhysicalInfo', {
-      personalData,
-    });
     // // checkUser api 호출
     // try {
     //   const response = await checkUser(filteredData);
-    //   console.log('register successful: ', response);
-    //   navigation.navigate('');
+    //   console.log('check successful: ', response);
+    //   navigation.navigate('signUpPhysicalInfo', { personalData });
     // } catch (error) {
     //   // src/utils/handleApiErrors.js 로 에러 핸들링
     //   // useForm의 setError 메서드를 props로 보내서 백엔드 에러메시지 핸들링
     //   handleFormErrors(error, setError);
     // }
+    navigation.navigate('signUpPhysicalInfo', {
+      personalData,
+    });
   };
   console.log('===========');
   console.log(errors);

@@ -12,7 +12,7 @@ export default function CustomButton({
   buttonStyle,
   containerStyle,
   onPress,
-  width,
+  width = '100%',
 }) {
   return (
     <Button
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     height: 60,
     width: widthPercentageToDP(100),
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
 
     // Android
     elevation: 5,

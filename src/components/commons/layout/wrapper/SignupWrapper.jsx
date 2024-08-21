@@ -16,7 +16,7 @@ export default function SignUpWrapper(props) {
     <GestureHandlerRootView>
       <SafeAreaView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={{ paddingHorizontal: 16, height: '100%' }}>
+          <View style={{ height: '100%' }}>
             <SignUpHeader title={props.title} />
             <KeyboardAwareScrollView
               contentContainerStyle={{
@@ -41,6 +41,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'space-between',
   },
 });

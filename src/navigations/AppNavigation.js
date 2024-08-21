@@ -1,15 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   HomeIcon,
   ChartBarIcon,
   UserIcon,
   EllipsisHorizontalIcon,
+  ChevronLeftIcon,
 } from 'react-native-heroicons/outline';
 import { globalStyles } from '../styles/globalStyles';
 import HomeScreen from '../screens/homeStack/HomeScreen';
-import DetailScreen from '../screens/homeStack/DetailScreen';
+import CalendarScreen from '../screens/homeStack/CalendarScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import InitialScreen from '../screens/auth/InitailScreen';
 import SignUpPersonInfoScreen from '../screens/auth/signup/SignUpPersonalInfoScreen';
@@ -19,15 +20,41 @@ import SocialScreen from '../screens/socialStack/SocialScreen';
 import MyDataScreen from '../screens/myDataStack/MyDataScreen';
 import SeeMoreScreen from '../screens/seeMoreStack/SeeMoreScreen';
 import { AuthProvider, useAuth } from '../context/authContext';
+import Title from '../components/commons/text/Title';
+import { View, Text, TouchableOpacity } from 'react-native';
+import NavigationHeaderTitle from '../components/commons/text/NavigationHeaderTitle';
+import { LoadingProvider } from '../context/loadingContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStackNavigator = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerTitle: () => <Title />,
+        }}
+      />
+      <Stack.Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          // headerLeft: () => (
+          //   <TouchableOpacity
+          //     onPress={() => {
+          //       navigation.goBack();
+          //     }}
+          //   >
+          //     <ChevronLeftIcon color={'black'} />
+          //   </TouchableOpacity>
+          // ),
+          headerBackVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -35,7 +62,13 @@ const HomeStackNavigator = () => {
 const SocialStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Social" component={SocialScreen} />
+      <Stack.Screen
+        name="Social"
+        component={SocialScreen}
+        options={{
+          headerTitle: () => <NavigationHeaderTitle title={'소셜'} />,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -68,7 +101,6 @@ const BottomTabNavigator = () => {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           height: 90,
-          paddingBottom: 5,
         },
       }}
     >
@@ -142,8 +174,10 @@ const MainNavigation = () => {
 
 export default function AppContainer() {
   return (
-    <AuthProvider>
-      <MainNavigation />
-    </AuthProvider>
+    <LoadingProvider>
+      <AuthProvider>
+        <MainNavigation />
+      </AuthProvider>
+    </LoadingProvider>
   );
 }

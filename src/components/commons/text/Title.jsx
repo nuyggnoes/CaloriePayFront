@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect } from 'react';
@@ -25,9 +25,9 @@ export default function Title() {
   }
 
   return (
-    <>
+    <View>
       <Text style={styles.title}>Calorie Pay</Text>
-    </>
+    </View>
   );
 }
 

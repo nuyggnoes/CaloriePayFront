@@ -2,17 +2,44 @@ import CalendarStrip from 'react-native-calendar-strip';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
+import { tierColors } from '../../utils/tierColors';
 
 export default function WeeklyCalendar() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const events = [
-    { date: '2024-08-22', title: 'Event 1' },
-    { date: '2024-08-24', title: 'Event 2' },
+    {
+      id: 1,
+      memberId: 1,
+      date: '2024-08-22',
+      tier: 'A',
+    },
+    {
+      id: 3,
+      memberId: 1,
+      date: '2024-08-24',
+      tier: 'C',
+    },
+    {
+      id: 3,
+      memberId: 1,
+      date: '2024-08-25',
+      tier: 'S',
+    },
+    {
+      id: 3,
+      memberId: 1,
+      date: '2024-08-19',
+      tier: 'D',
+    },
   ];
 
   const markedDates = events.map((event) => ({
     date: event.date,
-    dots: [{ color: 'red' }],
+    dots: [
+      {
+        color: tierColors[event.tier] || 'gray',
+      },
+    ],
   }));
 
   return (
