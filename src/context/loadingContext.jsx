@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { globalStyles } from '../styles/globalStyles';
 
 const LoadingContext = createContext();
 
@@ -14,7 +15,7 @@ export const LoadingProvider = ({ children }) => {
       {children}
       {isLoading && (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color={globalStyles.mainColor} />
         </View>
       )}
     </LoadingContext.Provider>

@@ -26,6 +26,7 @@ export const loginUser = async (userData) => {
 };
 
 export const joinUser = async (userData) => {
+  console.log('joinUser');
   console.log(userData);
   const { email, password } = userData;
   const loginData = { email, password };

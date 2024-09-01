@@ -10,6 +10,7 @@ export default function CustomButtonGroup({
   setSelectedIndex,
   isLabel,
   labelText,
+  selectedButtonStyle,
 }) {
   return (
     <View>
@@ -22,7 +23,10 @@ export default function CustomButtonGroup({
         }}
         containerStyle={{ ...styles.containerStyle, ...containerStyle }}
         buttonStyle={{ ...styles.buttonStyle, ...buttonStyle }}
-        selectedButtonStyle={styles.selectedButtonStyle}
+        selectedButtonStyle={{
+          ...styles.selectedButtonStyle,
+          ...selectedButtonStyle,
+        }}
         innerBorderStyle={styles.innerBorderStyle}
       />
     </View>
@@ -33,7 +37,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     height: 50,
     borderWidth: 0,
-    backgroundColor: globalStyles.mainBackgroundColor,
+    backgroundColor: 'white',
   },
   buttonStyle: {
     marginHorizontal: 10,

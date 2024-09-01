@@ -36,7 +36,7 @@ export default function SignUpGoalInfoScreen() {
     console.log(userData);
     // navigation.navigate('test1');
     // 회원가입 API 요청
-    // joinUser(userData);
+    joinUser(userData);
     logIn();
   };
   return (

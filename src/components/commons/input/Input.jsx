@@ -33,8 +33,7 @@ export default function CustomInput({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // borderWidth: 1,
-    // paddingVertical: 4,
+    paddingHorizontal: 16,
   },
   inputContainerStyle: {
     borderBottomWidth: 0,

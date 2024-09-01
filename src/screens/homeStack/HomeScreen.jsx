@@ -9,6 +9,7 @@ import MainWrapper from '../../components/commons/layout/wrapper/MainWrapper';
 import MainContainer from '../../components/commons/layout/container/MainContainer';
 import CustomButton from '../../components/commons/buttons/CustomButton';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from '../../styles/globalStyles';
 // bottom sheet
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -34,6 +35,7 @@ import { useLoading } from '../../context/loadingContext';
 import { getCalorieAndScore } from '../../api/calorieScoreApi';
 import { getCalendarTier } from '../../api/calendarApi';
 import { getStartAndEndOfWeek } from '../../utils/date';
+import CustomButtonGroup from '../../components/commons/buttons/CustomButtonGroup';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -48,57 +50,36 @@ export default function HomeScreen() {
 
   const { showLoading, hideLoading } = useLoading();
 
+  const fetchHomeData = async () => {
+    showLoading();
+    try {
+      const { start, end } = getStartAndEndOfWeek();
+      const [calorieResponse, calendarResponse] = await Promise.all([
+        getCalorieAndScore(),
+        getCalendarTier({ start, end }),
+      ]);
+      setUsername(calorieResponse.name);
+      setRecommendCal(calorieResponse.recommendKcal);
+      setRemainedCal(calorieResponse.remainKcal);
+      setCalorieScore(calorieResponse.score);
+      setCalendarTierData(calendarResponse);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      hideLoading();
+    }
+  };
+
   useEffect(() => {
     handlePresentModalPress();
-
-    // phone
-    const fetchContacts = async () => {
-      showLoading();
-      try {
-        await new Promise((resolve) =>
-          setTimeout(resolve, Math.random() * 1000 + 1000),
-        );
-        const { start, end } = getStartAndEndOfWeek();
-        const [calorieResponse, calendarResponse] = await Promise.all([
-          getCalorieAndScore(),
-          getCalendarTier({ start, end }),
-        ]);
-        setUsername(calorieResponse.name);
-        setRecommendCal(calorieResponse.recommendKcal);
-        setRemainedCal(calorieResponse.remainKcal);
-        setCalorieScore(calorieResponse.score);
-        setCalendarTierData(calorieResponse);
-
-        // phone
-        const { status } = await Contacts.requestPermissionsAsync();
-        console.log('status : ');
-        console.log(status);
-
-        if (status === 'granted') {
-          const { data } = await Contacts.getContactsAsync({
-            fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
-          });
-
-          if (data.length > 0) {
-            data.forEach((contact) => {
-              console.log('Name:', contact.name);
-              if (contact.phoneNumbers) {
-                contact.phoneNumbers.forEach((phone) => {
-                  console.log('Phone Number:', phone.number);
-                });
-              }
-              console.log('-------------------------');
-            });
-          }
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        hideLoading();
-      }
-    };
-    fetchContacts();
+    fetchHomeData();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchHomeData();
+    }, []),
+  );
 
   // bottom sheet modal
   const bottomSheetModalRef = useRef(null);
@@ -110,11 +91,6 @@ export default function HomeScreen() {
     console.log('handleSheetChanges', index);
     setIsModalOpen(index > 0);
   }, []);
-
-  // progress
-  const total = 2100;
-  const used = 780;
-  const progress = used / total;
 
   // chart
   const chartConfig = {
@@ -144,13 +120,21 @@ export default function HomeScreen() {
     legend: ['체중 변화'], // optional
   };
 
+  // bottomSheet Button Group
+  const [goal, setGoal] = useState(0);
+
   return (
     <>
       <MainWrapper>
         <MainContainer>
-          <ProgressBar total={2100} used={780} />
+          <Text>{username}</Text>
+          {recommendCal !== null && remainedCal !== null && (
+            <ProgressBar total={recommendCal} used={remainedCal} />
+          )}
           <MainContainer backgroundColor="#4E5566" hasShadow={false}>
-            <Text style={{ color: 'white' }}>Calorie Score | 868점</Text>
+            <Text style={{ color: 'white' }}>
+              Calorie Score | {calorieScore}점
+            </Text>
           </MainContainer>
         </MainContainer>
         <CustomButton title="메뉴 추천받기" />
@@ -190,6 +174,27 @@ export default function HomeScreen() {
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
               <MainContainer>
                 <ProgressBar total={2100} used={780} />
+              </MainContainer>
+              <MainContainer>
+                <Text>이용내역</Text>
+                <CustomButtonGroup
+                  buttons={['사용', '적립']}
+                  containerStyle={{
+                    flexDirection: 'row',
+                    height: 65,
+                    width: 280,
+                  }}
+                  buttonStyle={{
+                    marginVertical: 10,
+                    alignItems: 'center',
+                    borderRadius: 20,
+                  }}
+                  selectedIndex={goal}
+                  setSelectedIndex={setGoal}
+                  selectedButtonStyle={{
+                    backgroundColor: '#4E5566',
+                  }}
+                />
               </MainContainer>
               <Text style={styles.scrollText}>Item 2</Text>
               <Text style={styles.scrollText}>Item 3</Text>
